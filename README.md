@@ -1,4 +1,5 @@
 # DFMS-Mock-Up-Demo
 
+Dgital file management system hosted on git pages.
 
-See example here 
+To understand workflow create account and log in.
