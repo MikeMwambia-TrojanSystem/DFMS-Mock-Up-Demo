@@ -1,0 +1,23 @@
+<app-background>
+  <app-center-card>
+    <p>Hello {{ user }},</p>
+    <p>
+      Today the {{ date | date: "dd MMMM yyyy" }} under the {{ county }} county
+      digital file management system, you can perform the following tasks
+    </p>
+    <app-menu-container
+      *ngFor="let item of introItems"
+      [title]="item.label"
+      [notifications]="item.notifications"
+    >
+      <a
+        class="action-link"
+        [routerLink]="[action.url]"
+        [queryParams]="action.query"
+        *ngFor="let action of item.actions"
+        >{{ action.label }}</a
+      >
+    </app-menu-container>
+    <button mat-button class="out" (click)="onLogOut()">Sign out</button>
+  </app-center-card>
+</app-background>

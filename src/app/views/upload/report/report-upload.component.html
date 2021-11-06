@@ -1,0 +1,127 @@
+<app-background>
+  <app-center-card>
+    <h1 class="title">Upload Report</h1>
+    <form [formGroup]="form" class="form">
+      <p class="label">Report Title</p>
+      <mat-form-field appearance="standard">
+        <input
+          matInput
+          formControlName="titleOfReport"
+          placeholder="Report on Food Stability and Availability"
+        />
+        <mat-error *ngIf="form.get('titleOfReport').hasError('required')"
+          >Please enter report title!</mat-error
+        >
+      </mat-form-field>
+      <app-custom-button
+        style="margin-bottom: 20px"
+        [title]="
+          committee.length ? committee : 'Select Author Concerned Committee'
+        "
+        (buttonClick)="onSelectCommittee()"
+      ></app-custom-button>
+      <p class="label">Due Date</p>
+      <mat-form-field appearance="standard">
+        <input matInput formControlName="dueDate" type="date" />
+        <mat-error *ngIf="form.get('dueDate').hasError('required')"
+          >Please enter due date!</mat-error
+        >
+      </mat-form-field>
+      <p class="label">Originating Document</p>
+      <mat-form-field appearance="standard">
+        <mat-select formControlName="originatingDocType">
+          <mat-option
+            *ngFor="let o of originatings; let i = index"
+            [value]="o"
+            >{{ originatingsTitle[i] }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <app-custom-button
+        [title]="
+          originatingName.length
+            ? originatingName
+            : 'Add Originating ' + originating
+        "
+        *ngIf="
+          form.get('originatingDocType').value &&
+          form.get('originatingDocType').value !== 'others'
+        "
+        (buttonClick)="onSelectOriginatingDoc()"
+      ></app-custom-button>
+      <p
+        class="label"
+        *ngIf="form.get('originatingDocType').value === 'others'"
+      >
+        Document
+      </p>
+      <mat-form-field
+        appearance="standard"
+        *ngIf="form.get('originatingDocType').value === 'others'"
+      >
+        <input matInput formControlName="originatingDocTypeId" />
+        <mat-error *ngIf="form.get('originatingDocTypeId').hasError('required')"
+          >Please enter originating document!</mat-error
+        >
+      </mat-form-field>
+      <div class="buttons-container">
+        <app-custom-button
+          [title]="'Add Editors'"
+          class="custom-btn"
+          (buttonClick)="onSelectEditor()"
+        ></app-custom-button>
+        <app-custom-button
+          [title]="
+            reportName && reportName !== 'edit' ? reportName : 'Upload Report'
+          "
+          class="custom-btn"
+          style="margin-left: 10px"
+          (buttonClick)="onUploadReport()"
+        >
+        </app-custom-button>
+      </div>
+      <div class="buttons-container">
+        <div class="editors-container">
+          <p class="editors">{{ editors.length }} Editors</p>
+          <div *ngFor="let editor of editors" class="editor">
+            <mat-icon class="icon">person_outline</mat-icon>
+            <span>{{ editor.name }}</span>
+            <button
+              mat-button
+              color="warn"
+              (click)="onEditorDelete(editor._id)"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+        <app-custom-button
+          [title]="annexusName || 'Add Annexus'"
+          style="margin-left: 10px"
+          (buttonClick)="onUploadAnnexus()"
+        >
+        </app-custom-button>
+      </div>
+      <div class="actions">
+        <button
+          mat-button
+          type="button"
+          class="btn-draft"
+          [disabled]="form.invalid"
+          (click)="onSave(false)"
+        >
+          Save as Draft
+        </button>
+        <button
+          mat-raised-button
+          type="submit"
+          class="btn-save"
+          [disabled]="form.invalid || !reportName"
+          (click)="onSave(true)"
+        >
+          Preview Report
+        </button>
+      </div>
+    </form>
+  </app-center-card>
+</app-background>

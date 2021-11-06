@@ -1,0 +1,32 @@
+<app-background>
+  <app-center-card>
+    <h1 class="title">Bills</h1>
+    <app-search-bar (search)="onSearch($event)"></app-search-bar>
+    <div>
+      <app-info-item
+        *ngFor="let bill of bills"
+        [title]="bill.title"
+        [date]="bill.datePublished"
+        [subjects]="[bill.relatedTo]"
+        class="item"
+        [selectable]="selectable"
+        [sub]="'Bill on'"
+        [status]="bill.status"
+        [state]="bill.publishState"
+        (delete)="onDelete(bill._id)"
+        [editUrl]="'/generate/bill/' + bill._id"
+        (select)="onSelect(bill)"
+        (approve)="onApprove(bill)"
+        [canEdit]="bill.canEdit"
+        [canDelete]="bill.canDelete"
+        [viewUrl]="'/view/bill/' + bill._id"
+        [canApprove]="bill.canApprove"
+      >
+      </app-info-item>
+    </div>
+    <div class="list-no-value">
+      <p *ngIf="!bills.length">No Bills Listed!</p>
+      <p (click)="onCreateNew()" class="new">Create Bill</p>
+    </div>
+  </app-center-card>
+</app-background>

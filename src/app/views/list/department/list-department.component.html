@@ -1,0 +1,29 @@
+<app-background>
+  <app-center-card>
+    <h1 class="title">Department List</h1>
+    <app-search-bar (search)="onSearch($event)"></app-search-bar>
+    <div *ngIf="departments.length">
+      <app-list-item
+        *ngFor="let department of departments"
+        [title]="department.name"
+        [subtitle]="department.county"
+        [subcounty]="department.subCounty"
+        [selectable]="selectable"
+        (select)="onSelect(department)"
+        [editUrl]="'/create/department/' + department._id"
+        (delete)="onDelete(department._id)"
+        [published]="state !== 'draft'"
+        [canEdit]="department.canEdit"
+        [canDelete]="department.canDelete"
+        [viewUrl]="'/view/department/' + department._id"
+        [canApprove]="department.canApprove"
+        (approve)="onApprove(department)"
+      >
+      </app-list-item>
+    </div>
+    <div class="list-no-value">
+      <p *ngIf="!departments.length">No Departments Listed!</p>
+      <p (click)="onCreateNew()" class="new">Create Department</p>
+    </div>
+  </app-center-card>
+</app-background>

@@ -1,0 +1,112 @@
+<app-background>
+  <app-center-card>
+    <h1 class="title">Generate an Order Paper</h1>
+    <app-menu-container
+      *ngFor="let item of items; let i = index"
+      [notifications]="item.notifications"
+      (delete)="onDelete($event)"
+      [noView]="true"
+    >
+      <div class="content">
+        <div class="info">
+          <span>{{ i + 1 | number: "2.0-0" }}</span>
+          <span class="label">{{ item.label }}</span>
+        </div>
+        <div class="buttons-container">
+          <div class="btn-container" *ngIf="item.select">
+            <button
+              mat-stroked-button
+              class="btn"
+              (click)="onSelect(item.select)"
+              [disabled]="!this.itemStates[i].select"
+            >
+              Select
+            </button>
+            <button
+              mat-button
+              class="btn sub-btn"
+              [disabled]="this.itemStates[i].select"
+              (click)="onActiveState(i, 'select', item.key)"
+            >
+              Activate Select
+            </button>
+          </div>
+          <div class="btn-container" *ngIf="item.generate">
+            <button
+              mat-stroked-button
+              class="btn"
+              (click)="onGenerate(item.generate)"
+              [disabled]="!this.itemStates[i].generate"
+            >
+              Generate
+            </button>
+            <button
+              mat-button
+              class="btn sub-btn"
+              [disabled]="this.itemStates[i].generate"
+              (click)="onActiveState(i, 'generate', item.key)"
+            >
+              Activate Generate
+            </button>
+          </div>
+          <div class="btn-container">
+            <button
+              mat-stroked-button
+              class="btn"
+              (click)="
+                checkSkipped(item.key) ? onUnskip(item.key) : onSkip(item.key)
+              "
+              [disabled]="!this.itemStates[i].skip"
+            >
+              {{ checkSkipped(item.key) ? "Unskip" : "Skip" }}
+            </button>
+            <button
+              mat-button
+              class="btn sub-btn"
+              [disabled]="this.itemStates[i].skip"
+              (click)="onActiveState(i, 'skip', item.key)"
+            >
+              Activate Skip
+            </button>
+          </div>
+        </div>
+      </div>
+    </app-menu-container>
+    <app-menu-container>
+      <div class="content">
+        <div class="info">
+          <span>10</span>
+          <span class="label">Adjournment</span>
+        </div>
+      </div>
+    </app-menu-container>
+    <a
+      style="color: #008000; margin: 0; margin-top: -30px"
+      [routerLink]="['/', 'generate', 'tentative-business']"
+      [queryParams]="{ 'order-paper': orderPaper._id }"
+      *ngIf="orderPaper && orderPaper.publishState !== 'public'"
+    >
+      Generate Tentative Bussiness
+    </a>
+    <div class="actions">
+      <button
+        mat-button
+        type="button"
+        class="btn-draft"
+        [disabled]="form.invalid"
+        (click)="onSave(true)"
+      >
+        Save as Draft
+      </button>
+      <button
+        mat-raised-button
+        type="submit"
+        class="btn-save"
+        [disabled]="form.invalid"
+        (click)="onSave(false)"
+      >
+        Publish Order Paper
+      </button>
+    </div>
+  </app-center-card>
+</app-background>

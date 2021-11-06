@@ -1,0 +1,28 @@
+<app-background>
+  <app-center-card>
+    <h1 class="title">Statements</h1>
+    <app-search-bar (search)="onSearch($event)"></app-search-bar>
+    <div>
+      <app-statement-item
+        *ngFor="let statement of statements"
+        class="item"
+        [selectable]="selectable"
+        [state]="statement.publishState"
+        [editUrl]="'/upload/statement/' + statement._id"
+        [info]="getInfo(statement)"
+        (delete)="onDelete(statement._id)"
+        (select)="onSelect(statement)"
+        [canEdit]="statement.canEdit"
+        [canDelete]="statement.canDelete"
+        [viewUrl]="'/view/statement/' + statement._id"
+        [canApprove]="statement.canApprove"
+        (approve)="onApprove(statement)"
+      >
+      </app-statement-item>
+    </div>
+    <div class="list-no-value">
+      <p *ngIf="!statements.length">No Statements Listed!</p>
+      <p (click)="onCreateNew()" class="new">Create Statement</p>
+    </div>
+  </app-center-card>
+</app-background>

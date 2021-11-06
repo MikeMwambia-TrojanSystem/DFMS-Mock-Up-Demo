@@ -1,0 +1,48 @@
+.main {
+  max-width: 60vw;
+}
+
+.title {
+  font-weight: 500;
+}
+
+.words {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+
+  .line {
+    margin: 5px 0;
+  }
+
+  .word {
+    font-weight: 500;
+  }
+}
+
+.actions {
+  margin: 15px 0;
+  display: flex;
+}
+
+.btn-save {
+  background: #008000;
+  color: white;
+  font-weight: 400;
+  padding: 3px 25px;
+  border-radius: 10px;
+}
+
+.btn-discard {
+  margin-right: auto;
+}
+
+:host ::ng-deep {
+  .ql-toolbar {
+    margin-top: 15px;
+  }
+
+  .ql-container {
+    margin-bottom: 30px;
+  }
+}

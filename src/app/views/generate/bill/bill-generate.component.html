@@ -1,0 +1,129 @@
+<app-background>
+  <app-center-card>
+    <h1 class="title">Generate and File a Bill</h1>
+    <form [formGroup]="form" class="form">
+      <p class="label">Title of Bill</p>
+      <mat-form-field appearance="standard">
+        <input
+          matInput
+          formControlName="titleOfBill"
+          placeholder="Acts on Food Reduction and Housing"
+        />
+        <mat-error *ngIf="form.get('titleOfBill').hasError('required')"
+          >Please enter bill title!</mat-error
+        >
+      </mat-form-field>
+      <p class="label">Bill No</p>
+      <mat-form-field appearance="standard">
+        <input matInput formControlName="billNo" placeholder="23 0f 2021" />
+        <mat-error *ngIf="form.get('billNo').hasError('required')"
+          >Please enter bill number!</mat-error
+        >
+      </mat-form-field>
+      <p class="label">Related To (Maximum 10 words)</p>
+      <mat-form-field appearance="standard">
+        <input matInput formControlName="relatedTo" />
+        <mat-error *ngIf="form.get('billNo').hasError('required')"
+          >Please enter related to content!</mat-error
+        >
+      </mat-form-field>
+      <div class="custom-btn-container">
+        <app-custom-button
+          [title]="sponsorName || 'Select Sponsor'"
+          class="custom-btn"
+          (buttonClick)="onSelectSponsored()"
+        ></app-custom-button>
+        <app-custom-button
+          [title]="committeeName || 'Select Concerned Committee'"
+          class="custom-btn"
+          (buttonClick)="onSelectCommittee()"
+        ></app-custom-button>
+      </div>
+      <p class="label">Add Sponsor Description or Post</p>
+      <mat-form-field appearance="standard">
+        <textarea
+          matInput
+          formControlName="sponsorDescription"
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="2"
+        ></textarea>
+        <mat-error *ngIf="form.get('sponsorDescription').hasError('required')"
+          >Please enter sponsor description!</mat-error
+        >
+      </mat-form-field>
+      <div class="date-container">
+        <div class="date">
+          <p class="label">Date Published</p>
+          <mat-form-field appearance="standard">
+            <input matInput formControlName="datePublished" type="date" />
+            <mat-error *ngIf="form.get('datePublished').hasError('required')"
+              >Please enter date published!</mat-error
+            >
+          </mat-form-field>
+        </div>
+        <div class="date">
+          <p class="label">First Reading</p>
+          <mat-form-field appearance="standard">
+            <input matInput formControlName="firstReadingDate" type="date" />
+            <mat-error *ngIf="form.get('firstReadingDate').hasError('required')"
+              >Please enter date first reading!
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="date-container">
+        <div class="date">
+          <p class="label">Second Reading</p>
+          <mat-form-field appearance="standard">
+            <input matInput formControlName="secondReadingDate" type="date" />
+            <mat-error
+              *ngIf="form.get('secondReadingDate').hasError('required')"
+              >Please enter date second reading!
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="date">
+          <p class="label">Date Passed</p>
+          <mat-form-field appearance="standard">
+            <input matInput formControlName="datePassed" type="date" />
+            <mat-error *ngIf="form.get('datePassed').hasError('required')"
+              >Please enter date passed!</mat-error
+            >
+          </mat-form-field>
+        </div>
+      </div>
+      <app-custom-button
+        [title]="reportName || 'Select Bill Report'"
+        class="custom-btn standalone"
+        (buttonClick)="onSelectBillReport()"
+      >
+      </app-custom-button>
+      <app-custom-button
+        [title]="billName || 'Upload Bill Soft Copy'"
+        class="custom-btn standalone"
+        (buttonClick)="onUpload()"
+      >
+      </app-custom-button>
+      <div class="actions">
+        <button
+          mat-button
+          type="button"
+          class="btn-draft"
+          [disabled]="form.invalid"
+          (click)="onSave(false)"
+        >
+          Save as Draft
+        </button>
+        <button
+          mat-raised-button
+          type="submit"
+          class="btn-save"
+          [disabled]="form.invalid"
+          (click)="onSave(true)"
+        >
+          Publish Bills
+        </button>
+      </div>
+    </form>
+  </app-center-card>
+</app-background>

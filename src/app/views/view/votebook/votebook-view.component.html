@@ -1,0 +1,97 @@
+<app-background>
+  <app-center-card>
+    <h1 class="title">Votes and Proceedings</h1>
+    <form [formGroup]="form" class="form">
+      <p class="label">Order Paper No</p>
+      <mat-form-field appearance="standard">
+        <input matInput formControlName="orderPapersNo" />
+      </mat-form-field>
+
+      <p class="label">Assembly No</p>
+      <mat-form-field appearance="standard">
+        <input matInput formControlName="assemblyNo" />
+      </mat-form-field>
+
+      <p class="label">Session No</p>
+      <mat-form-field appearance="standard">
+        <input matInput formControlName="sessionNo" />
+      </mat-form-field>
+
+      <div class="grid">
+        <div class="grid-form">
+          <p class="label">Assembly Sitting No</p>
+          <mat-form-field appearance="standard">
+            <input matInput type="number" />
+          </mat-form-field>
+        </div>
+        <div class="grid-form">
+          <p class="label">Page No</p>
+          <mat-form-field appearance="standard">
+            <input matInput formControlName="pageNoToDate" type="number" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <p class="label">Presided By :-</p>
+      <mat-form-field appearance="standard">
+        <mat-select formControlName="presidingPosition">
+          <mat-option value="Speaker of the Assembly"
+            >Speaker of the Assembly</mat-option
+          >
+          <mat-option value="Member of the Speaker Parliament"
+            >Member of the Speaker Parliament</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <p class="label" *ngIf="presidingPosition === 'Speaker of the Assembly'">
+        Speaker Name
+      </p>
+      <mat-form-field
+        appearance="standard"
+        *ngIf="presidingPosition === 'Speaker of the Assembly'"
+      >
+        <input matInput formControlName="presiding" />
+      </mat-form-field>
+
+      <p class="label" *ngIf="presidingPosition === 'Speaker of the Assembly'">
+        Speaker Role
+      </p>
+      <mat-form-field
+        appearance="standard"
+        *ngIf="presidingPosition === 'Speaker of the Assembly'"
+      >
+        <input matInput formControlName="presidingPosition" />
+      </mat-form-field>
+
+      <p
+        class="label"
+        *ngIf="presidingPosition === 'Member of the Speaker Parliament'"
+      >
+        Member
+      </p>
+      <mat-form-field
+        appearance="standard"
+        *ngIf="presidingPosition === 'Member of the Speaker Parliament'"
+      >
+        <input matInput formControlName="presiding" />
+      </mat-form-field>
+
+      <div class="actions">
+        <button
+          mat-raised-button
+          type="button"
+          class="btn-save"
+          [routerLink]="['/', 'view', 'votebook-content', id]"
+        >
+          View Content
+        </button>
+      </div>
+    </form>
+    <p class="view-author author" *ngIf="authorName">
+      Author: {{ authorName }}
+    </p>
+    <p class="view-author" *ngIf="approver">Approved By: {{ approver }}</p>
+    <p class="view-author" *ngIf="approver">Approved At: {{ approvedAt }}</p>
+  </app-center-card>
+</app-background>

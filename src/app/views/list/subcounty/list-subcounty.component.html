@@ -1,0 +1,30 @@
+<app-background>
+  <app-center-card>
+    <h1 class="title">Subcounty List</h1>
+    <app-search-bar (search)="onSearch($event)"></app-search-bar>
+    <div *ngIf="subCounties.length">
+      <app-list-item
+        *ngFor="let subcounty of subCounties"
+        [title]="subcounty.name"
+        [subtitle]="subcounty.createdAt"
+        [isSubDate]="true"
+        [dateSub]="'Published'"
+        [selectable]="selectable"
+        (select)="onSelect(subcounty)"
+        [editUrl]="'/create/subcounty/' + subcounty._id"
+        (delete)="onDelete(subcounty._id)"
+        [published]="state !== 'draft'"
+        [canEdit]="subcounty.canEdit"
+        [canDelete]="subcounty.canDelete"
+        [viewUrl]="'/view/subcounty/' + subcounty._id"
+        [canApprove]="subcounty.canApprove"
+        (approve)="onApprove(subcounty)"
+      >
+      </app-list-item>
+    </div>
+    <div class="list-no-value">
+      <p *ngIf="!subCounties.length">No Sub Counties Listed!</p>
+      <p (click)="onCreateNew()" class="new">Create Sub County</p>
+    </div>
+  </app-center-card>
+</app-background>

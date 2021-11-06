@@ -1,0 +1,29 @@
+<app-background>
+  <app-center-card>
+    <h1 class="title">Committee List</h1>
+    <app-search-bar (search)="onSearch($event)"></app-search-bar>
+    <div *ngIf="committees.length">
+      <app-list-item
+        *ngFor="let committee of committees"
+        [title]="committee.name"
+        [subtitle]="committee.createdAt"
+        [isSubDate]="true"
+        [selectable]="selectable"
+        [published]="state !== 'draft'"
+        (select)="onSelect(committee)"
+        [editUrl]="'/create/committee/' + committee._id"
+        (delete)="onDelete(committee._id)"
+        (approve)="onApprove(committee)"
+        [canEdit]="committee.canEdit"
+        [canDelete]="committee.canDelete"
+        [viewUrl]="'/view/committee/' + committee._id"
+        [canApprove]="committee.canApprove"
+      >
+      </app-list-item>
+    </div>
+    <div class="list-no-value">
+      <p *ngIf="!committees.length">No Committees Listed!</p>
+      <p (click)="onCreateNew()" class="new">Create Committee</p>
+    </div>
+  </app-center-card>
+</app-background>

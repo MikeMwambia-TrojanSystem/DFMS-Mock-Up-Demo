@@ -1,0 +1,74 @@
+<app-background>
+  <app-center-card>
+    <h1 class="title">
+      Generate Tentative Business{{ " "
+      }}{{ orderPaperNo ? " for Order Paper No." + orderPaperNo : "" }}
+    </h1>
+    <form [formGroup]="form" class="form">
+      <app-custom-button
+        [title]="
+          orderPaperNo ? 'Order Paper No.' + orderPaperNo : 'Select Order Paper'
+        "
+        [disabled]="hasOrderPaperIdQuery"
+        (buttonClick)="onSelectOrderPaper()"
+      >
+      </app-custom-button>
+
+      <p class="label">Choose Date</p>
+      <mat-form-field appearance="standard">
+        <input matInput type="date" formControlName="dateOfContent" />
+        <mat-error *ngIf="form.get('dateOfContent').hasError('required')"
+          >Please enter date!</mat-error
+        >
+      </mat-form-field>
+
+      <p class="label">Enter Exact Sitting Time</p>
+      <mat-form-field appearance="standard">
+        <input
+          matInput
+          [ngxTimepicker]="picker"
+          readonly
+          formControlName="timeOfContent"
+          [format]="24"
+        />
+        <ngx-material-timepicker #picker></ngx-material-timepicker>
+        <mat-error *ngIf="form.get('timeOfContent').hasError('required')"
+          >Please enter time!</mat-error
+        >
+      </mat-form-field>
+
+      <p class="label">Assembly Sitting Session</p>
+      <mat-form-field appearance="standard">
+        <mat-select formControlName="assemblySitting">
+          <mat-option value="Morning">Morning</mat-option>
+          <mat-option value="Afternoon">Afternoon</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('assemblySitting').hasError('required')"
+          >Please select assembly sitting session!</mat-error
+        >
+      </mat-form-field>
+
+      <div class="actions">
+        <button
+          mat-button
+          type="button"
+          class="btn-draft"
+          (click)="onNotNow()"
+          *ngIf="hasOrderPaperIdQuery"
+        >
+          Not now
+        </button>
+        <div *ngIf="!hasOrderPaperIdQuery"></div>
+        <button
+          mat-raised-button
+          type="button"
+          class="btn-save"
+          (click)="onGenerate()"
+          [disabled]="form.invalid"
+        >
+          Generate Content
+        </button>
+      </div>
+    </form>
+  </app-center-card>
+</app-background>

@@ -1,0 +1,39 @@
+<app-background>
+  <app-center-card>
+    <h1 class="title">MCA Lists</h1>
+    <app-search-bar (search)="onSearch($event)"></app-search-bar>
+    <div *ngIf="mcaEmployees.length">
+      <app-list-item
+        *ngFor="let mcaEmployee of mcaEmployees"
+        [title]="mcaEmployee.name"
+        [pic]="mcaEmployee.profilePic"
+        [selectable]="selectable"
+        (select)="onSelect(mcaEmployee)"
+        [editUrl]="'/create/mca/' + mcaEmployee._id"
+        (delete)="onDelete(mcaEmployee._id)"
+        [canEdit]="mcaEmployee.canEdit"
+        [canDelete]="mcaEmployee.canDelete"
+        [viewUrl]="'/view/mca/' + mcaEmployee._id"
+        [canApprove]="mcaEmployee.canApprove"
+        (approve)="onApprove(mcaEmployee)"
+      ></app-list-item>
+      <!-- <app-list-item
+        *ngFor="let mcaEmployee of mcaEmployees"
+        [title]="mcaEmployee.name"
+        [subtitle]="mcaEmployee.ward.wardName"
+        [pic]="mcaEmployee.profilePic"
+        [selectable]="selectable"
+        (select)="onSelect(mcaEmployee)"
+        [editUrl]="'/create/mca/' + mcaEmployee._id"
+        [published]="mcaEmployee.status"
+        (delete)="onDelete(mcaEmployee._id)"
+        [canEdit]="mcaEmployee.canEdit"
+        [canDelete]="mcaEmployee.canDelete"
+      ></app-list-item> -->
+    </div>
+    <div class="list-no-value">
+      <p *ngIf="!mcaEmployees.length">No Employees Listed!</p>
+      <p (click)="onCreateNewMca()" class="new">Create Mca</p>
+    </div>
+  </app-center-card>
+</app-background>

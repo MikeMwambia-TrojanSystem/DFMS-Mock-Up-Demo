@@ -1,0 +1,32 @@
+<app-background>
+  <app-center-card>
+    <h1 class="title">Acts</h1>
+    <app-search-bar (search)="onSearch($event)"></app-search-bar>
+    <div>
+      <app-act-item
+        *ngFor="let act of acts"
+        [number]="act.actNo"
+        [title]="act.titleOfAct"
+        [date]="act.datePublished"
+        [relatedTo]="act.relatedTo"
+        [sponsor]="act.sponsorId.sponsorName"
+        class="item"
+        [selectable]="selectable"
+        [state]="act.publishState"
+        [editUrl]="'/generate/act/' + act._id"
+        (delete)="onDelete(act._id)"
+        (select)="onSelect(act)"
+        (approve)="onApprove(act)"
+        [canEdit]="act.canEdit"
+        [canDelete]="act.canDelete"
+        [canApprove]="act.canApprove"
+        [viewUrl]="'/view/act/' + act._id"
+      >
+      </app-act-item>
+    </div>
+    <div class="list-no-value">
+      <p *ngIf="!acts.length">No Acts Listed!</p>
+      <p (click)="onCreateNew()" class="new">Create Act</p>
+    </div>
+  </app-center-card>
+</app-background>

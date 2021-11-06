@@ -1,0 +1,26 @@
+<app-background>
+  <app-center-card>
+    <h1 class="title">Personnel List</h1>
+    <app-search-bar (search)="onSearch($event)"></app-search-bar>
+    <div>
+      <app-list-item
+        *ngFor="let personnel of personnels"
+        [title]="personnel.name"
+        [pic]="personnel.profilePic"
+        [selectable]="selectable"
+        [editUrl]="'/create/employee/' + personnel._id"
+        (delete)="onDelete(personnel._id)"
+        (select)="onSelect(personnel)"
+        [canEdit]="personnel.canEdit"
+        [canDelete]="personnel.canDelete"
+        [viewUrl]="'/view/employee/' + personnel._id"
+        [canApprove]="personnel.canApprove"
+        (approve)="onApprove(personnel)"
+      ></app-list-item>
+    </div>
+    <div class="list-no-value">
+      <p *ngIf="!personnels.length">No Personnels Listed!</p>
+      <p (click)="onCreateNew()" class="new">Create Personnel</p>
+    </div>
+  </app-center-card>
+</app-background>

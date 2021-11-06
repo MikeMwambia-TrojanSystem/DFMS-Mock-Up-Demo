@@ -1,0 +1,29 @@
+<app-background>
+  <app-center-card>
+    <h1 class="title">Wards List</h1>
+    <app-search-bar (search)="onSearch($event)"></app-search-bar>
+    <div *ngIf="wards.length">
+      <app-list-item
+        *ngFor="let ward of wards"
+        [title]="ward.name"
+        [subtitle]="ward.county"
+        [subcounty]="ward.subCounty"
+        [selectable]="selectable"
+        [editUrl]="'/create/wards/' + ward._id"
+        (delete)="onDelete(ward._id)"
+        (select)="onSelect(ward)"
+        [published]="state !== 'draft'"
+        [canEdit]="ward.canEdit"
+        [canDelete]="ward.canDelete"
+        [viewUrl]="'/view/ward/' + ward._id"
+        [canApprove]="ward.canApprove"
+        (approve)="onApprove(ward)"
+      >
+      </app-list-item>
+    </div>
+    <div class="list-no-value">
+      <p *ngIf="!wards.length">No Wards Listed!</p>
+      <p (click)="onCreateNew()" class="new">Create Ward</p>
+    </div>
+  </app-center-card>
+</app-background>

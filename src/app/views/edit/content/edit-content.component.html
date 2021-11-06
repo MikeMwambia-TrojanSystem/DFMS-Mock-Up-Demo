@@ -1,0 +1,45 @@
+<app-background>
+  <app-center-card>
+    <div class="main">
+      <form [formGroup]="form">
+        <h1 class="title">Generate Content Page</h1>
+        <span class="words"
+          >Words Per Page: <span class="limit">{{ words }}</span></span
+        >
+        <quill-editor formControlName="content"></quill-editor>
+        <div class="pages">
+          <div class="previous" *ngIf="page - 1 > 0">
+            <span
+              >Previous page: <span class="page">{{ page - 1 }}</span></span
+            >
+          </div>
+          <div class="current">
+            <span
+              >Currently writing page:
+              <span class="page">{{ page }}</span></span
+            >
+          </div>
+        </div>
+        <div class="actions">
+          <button
+            mat-raised-button
+            color="error"
+            class="btn-discard"
+            (click)="onDiscard()"
+          >
+            Discard
+          </button>
+          <button
+            mat-raised-button
+            type="submit"
+            class="btn-save"
+            [disabled]="form.invalid"
+            (click)="onPreview()"
+          >
+            Save Content
+          </button>
+        </div>
+      </form>
+    </div>
+  </app-center-card>
+</app-background>

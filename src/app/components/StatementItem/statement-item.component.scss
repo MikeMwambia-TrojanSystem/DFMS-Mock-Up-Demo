@@ -1,0 +1,67 @@
+:host {
+  padding: 25px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.line {
+  margin-bottom: 6px;
+}
+
+.head {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.bold {
+  font-weight: 500;
+}
+
+.small {
+  font-size: 13px;
+}
+
+.color {
+  color: #008000;
+}
+
+.icon {
+  color: #008000;
+  margin-right: 20px;
+  font-size: 35px;
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+}
+
+.btn {
+  margin-left: auto;
+}
+
+.state {
+  display: flex;
+  align-items: center;
+
+  .dot {
+    padding: 4px;
+    border-radius: 100%;
+    background: gray;
+    margin-right: 5px;
+  }
+
+  .label {
+    font-style: italic;
+  }
+}

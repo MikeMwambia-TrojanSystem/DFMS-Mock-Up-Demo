@@ -1,0 +1,48 @@
+<app-background>
+  <app-center-card>
+    <div class="content">
+      <h1 class="title">Generate Votebook on {{ title }}</h1>
+      <form>
+        <quill-editor [formControl]="content"></quill-editor>
+      </form>
+      <div class="words">
+        <span>No of Words: </span>
+        <span class="limit">{{ words }}</span>
+      </div>
+      <!-- <div class="pages">
+        <div class="previous" *ngIf="previousPage > 0">
+          <span
+            >Previous page: <span class="page">{{ previousPage }}</span></span
+          >
+        </div>
+        <div class="current">
+          <span
+            >Currently writing page:
+            <span class="page">{{ currentPage }}</span></span
+          >
+        </div>
+      </div> -->
+      <div class="btn-container">
+        <button
+          mat-raised-button
+          color="error"
+          class="discard-btn"
+          (click)="onDiscard()"
+        >
+          Discard
+        </button>
+        <button
+          mat-raised-button
+          class="publish-btn"
+          [disabled]="content.invalid"
+          (click)="onPublish()"
+        >
+          Save Content
+        </button>
+      </div>
+      <div class="hr"></div>
+      <h2 class="subtitle">{{ title }}</h2>
+      <app-oath-content [content]="orderPaperContent"></app-oath-content>
+    </div>
+  </app-center-card>
+</app-background>

@@ -1,0 +1,158 @@
+<app-background>
+  <app-center-card>
+    <div class="main">
+      <h1 class="title">Generate and File a Petition</h1>
+      <form [formGroup]="form" class="form">
+        <p class="label">
+          Summarize Issues that make up this petition (Maximum 200 words)
+        </p>
+        <mat-form-field appearance="standard">
+          <textarea
+            matInput
+            formControlName="content"
+            placeholder="Petition on housing and food"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="2"
+          ></textarea>
+          <mat-error *ngIf="form.get('content').hasError('required')"
+            >Please fill in issues!</mat-error
+          >
+          <mat-error *ngIf="form.get('content').hasError('wordLimits')"
+            >Petition content have no more than 200 words!</mat-error
+          >
+        </mat-form-field>
+        <p class="label">Petition concerning which sector(s)</p>
+        <mat-form-field appearance="standard">
+          <input
+            matInput
+            formControlName="relatedTo"
+            placeholder="Food and Water"
+          />
+          <mat-error *ngIf="form.get('relatedTo').hasError('required')"
+            >Please enter concerning sector!</mat-error
+          >
+        </mat-form-field>
+        <div class="input-container">
+          <div class="input">
+            <p class="label">Date Provided to the Assembly by Petitioner</p>
+            <mat-form-field appearance="standard">
+              <input matInput formControlName="datePresented" type="date" />
+              <mat-error *ngIf="form.get('datePresented').hasError('required')"
+                >Please enter date provided!</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="input">
+            <p class="label">
+              Date Set for the petition to be discussed by the assembly
+            </p>
+            <mat-form-field appearance="standard">
+              <input matInput formControlName="dateToBDiscussed" type="date" />
+              <mat-error
+                *ngIf="form.get('dateToBDiscussed').hasError('required')"
+                >Please enter date set!
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="input-container">
+          <div class="input">
+            <p class="label">Petition Number</p>
+            <mat-form-field appearance="standard">
+              <input matInput formControlName="petitionNumber" />
+              <mat-error *ngIf="form.get('petitionNumber').hasError('required')"
+                >Please enter petition number!</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="input">
+            <app-custom-button
+              [title]="
+                committeeName.length
+                  ? committeeName
+                  : 'Select Concerned Committee'
+              "
+              (buttonClick)="onSelectCommittee()"
+            ></app-custom-button>
+          </div>
+        </div>
+        <div class="input-container">
+          <div class="input">
+            <p class="label">Due date of Response by Committee</p>
+            <mat-form-field appearance="standard">
+              <input
+                matInput
+                formControlName="dateCommitteResponse"
+                type="date"
+              />
+              <mat-error
+                *ngIf="form.get('dateCommitteResponse').hasError('required')"
+                >Please enter due date!</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="input"></div>
+        </div>
+
+        <div class="custom-btn-container">
+          <app-custom-button
+            [title]="sponsorName.length ? sponsorName : 'Sponsored By'"
+            class="custom-btn sponsored"
+            (buttonClick)="onSelectSponsored()"
+          >
+          </app-custom-button>
+          <app-custom-button
+            [title]="'Add Petitioner'"
+            class="custom-btn petitioner"
+            (buttonClick)="onAddPetitioner()"
+          >
+          </app-custom-button>
+          <app-custom-button
+            [title]="fileName ? fileName : 'Upload Soft copy of the petition'"
+            class="custom-btn upload"
+            (buttonClick)="onUpload()"
+          >
+          </app-custom-button>
+          <div class="list">
+            <div
+              class="petitioner-container"
+              *ngFor="let p of petitionersName; let index = index"
+            >
+              <mat-icon class="petitioner-icon">person_outline</mat-icon>
+              <span>{{ p }}</span>
+              <button
+                mat-button
+                color="warn"
+                class="btn-delete"
+                type="button"
+                (click)="onPetitionerDelete(index)"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <button
+            mat-button
+            type="button"
+            class="btn-draft"
+            [disabled]="form.invalid"
+            (click)="onSave(false)"
+          >
+            Save as Draft
+          </button>
+          <button
+            mat-raised-button
+            type="submit"
+            class="btn-save"
+            [disabled]="form.invalid"
+            (click)="onSave(true)"
+          >
+            Publish Petition
+          </button>
+        </div>
+      </form>
+    </div>
+  </app-center-card>
+</app-background>

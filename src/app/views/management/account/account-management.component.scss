@@ -1,0 +1,10 @@
+.title {
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0;
+  margin-top: 50px;
+
+  &:first-child {
+    margin: 0;
+  }
+}

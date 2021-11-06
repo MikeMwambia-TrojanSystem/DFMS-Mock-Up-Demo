@@ -1,0 +1,30 @@
+<app-background>
+  <app-center-card>
+    <h1 class="title">Votebooks</h1>
+    <app-search-bar (search)="onSearch($event)"></app-search-bar>
+    <div>
+      <app-order-paper-item
+        *ngFor="let votebook of votebooks"
+        [number]="votebook.orderPapersNo"
+        [date]="votebook.datePublished"
+        class="item"
+        [selectable]="selectable"
+        [sub]="'Vote Book for Order Paper'"
+        [state]="votebook.publishState"
+        [editUrl]="getEditUrl(votebook)"
+        (delete)="onDelete(votebook._id)"
+        (select)="onSelect(votebook)"
+        [canEdit]="votebook.canEdit"
+        [canDelete]="votebook.canDelete"
+        [viewUrl]="'/view/votebook/' + votebook._id"
+        [canApprove]="votebook.canApprove"
+        (approve)="onApprove(votebook)"
+      >
+      </app-order-paper-item>
+    </div>
+    <div class="list-no-value">
+      <p *ngIf="!votebooks.length">No Votebook Listed!</p>
+      <p (click)="onCreateNew()" class="new">Create Votebook</p>
+    </div>
+  </app-center-card>
+</app-background>
