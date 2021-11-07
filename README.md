@@ -31,4 +31,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 Dgital file management system hosted on git pages.
 
-To understand workflow create account and log in.
+To understand workflow create account and log in. https://mikemwambia-trojansystem.github.io/DFMS-Mock-Up-Demo/login
