@@ -41,7 +41,7 @@ const errorHandler = (error: HttpErrorResponse) => {
   providedIn: 'root',
 })
 export class ApiService {
-  private _baseUrl = 'http://65.1.179.219/';
+  private _baseUrl = 'http://15.207.19.211/';
   private _timeout = 60 * 1000;
 
   constructor(private http: HttpClient) {}
